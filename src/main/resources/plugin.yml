@@ -1,0 +1,26 @@
+name: ItemStore
+description: Store and load serialized items
+author: StarTux
+version: 0.1
+api-version: 1.13
+website: https://cavetale.com
+main: com.winthier.itemstore.ItemStorePlugin
+depend: []
+commands:
+  storeitem:
+    description: Store an item
+    usage: /<command> <name>
+    permission: itemstore.store
+  loaditem:
+    description: Load an item
+    usage: /<command> <name>
+    permission: itemstore.load
+  fixbook:
+    description: Fix a book
+    usage: /<command>
+    permission: itemstore.load
+permissions:
+  itemstore.store:
+    default: op
+  itemstore.load:
+    default: op
