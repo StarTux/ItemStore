@@ -2,7 +2,6 @@ package com.winthier.itemstore;
 
 import java.io.File;
 import java.io.IOException;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
@@ -11,6 +10,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import static net.kyori.adventure.text.Component.text;
+import static net.kyori.adventure.text.format.NamedTextColor.RED;
+import static net.kyori.adventure.text.format.NamedTextColor.YELLOW;
 
 public final class ItemStorePlugin extends JavaPlugin {
     private YamlConfiguration storedItems;
@@ -63,7 +65,7 @@ public final class ItemStorePlugin extends JavaPlugin {
                 }
                 this.getStoredItems(true).set(s2, itemInHand.clone());
                 this.saveStoredItems();
-                player.sendMessage("" + ChatColor.YELLOW + "Item stored");
+                player.sendMessage(text("Item stored", YELLOW));
             } else if ("LoadItem".equalsIgnoreCase(s) && array.length == 1) {
                 if (player == null) {
                     throw new CommandException("Player expected");
@@ -77,12 +79,12 @@ public final class ItemStorePlugin extends JavaPlugin {
                     throw new CommandException("Item not found: " + s3);
                 }
                 player.getInventory().addItem(new ItemStack[] {itemStack.clone()});
-                player.sendMessage("" + ChatColor.YELLOW + "Item given");
+                player.sendMessage(text("Item given", YELLOW));
             } else {
                 return false;
             }
         } catch (CommandException ex) {
-            commandSender.sendMessage("" + ChatColor.RED + ex.getMessage());
+            commandSender.sendMessage(text(ex.getMessage(), RED));
         }
         return true;
     }
